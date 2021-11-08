@@ -9,11 +9,11 @@
 	$(document).ready(function(){ // 현재 문서가 준비되면 매개변수로 넣은 콜백 함수를 실행하라는 의미
 		$('#loginBtn').click(function(){
 			if($('#memberId').val() == '') {
-				alert('memberId를 입력하세요');
+				alert('아이디를 입력하세요');
 				return;
 			}
 			if($('#memberPw').val() == '') {
-				alert('memberPw를 입력하세요');
+				alert('비밀번호를 입력하세요');
 				return;
 			}
 			
@@ -35,7 +35,10 @@
 				<td><input type="password" id="memberPw" name="memberPw"></td>
 			</tr>
 		</table>
-		<button type="button" id="loginBtn" onclick="button()">로그인</button>
+		<div>
+			<button type="button" id="loginBtn" onclick="button()">로그인</button>
+			<a href="${pageContext.request.contextPath}/addMember">회원가입</a>
+		</div>	
 	</form>
 </body>
 </html>
