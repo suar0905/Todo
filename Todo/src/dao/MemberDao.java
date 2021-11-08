@@ -9,6 +9,31 @@ import vo.Member;
 
 // 쿼리만 만드는 곳
 public class MemberDao {
+	// (2) 회원가입 메소드
+	public int insertMember(Connection conn, Member member) throws SQLException {
+		// 디버깅 코드
+		System.out.println("[debug] MemberDao : memberId, memberPw값 확인 -> " + member.toString());
+		
+		// 쿼리 생성
+		String sql = MemberQuery.INSERT_MEMBER;
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, member.getMemberId());
+		stmt.setString(2, member.getMemberPw());
+		
+		// 쿼리 실행
+		int insertCheck = stmt.executeUpdate();
+		
+		if(insertCheck == 1) {
+			System.out.println("[debug] MemberDao : 회원가입 성공!");
+		} else {
+			System.out.println("[debug] MemberDao : 회원가입 실패!");
+		}
+		
+		// 기록 종료
+		stmt.close();
+		
+		return insertCheck;
+	}
 	
 	// (1) 로그인 메소드
 	public Member login(Connection conn, Member paramMember) throws SQLException {

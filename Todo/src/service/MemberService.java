@@ -11,6 +11,29 @@ public class MemberService {
 	// MemberService가 어떤 행위를 하기 위해서 사용되어지는 memberDao는 매번 동일해야 하니 맨 윗부분에 선언
 	private MemberDao memberDao;
 	
+	// (2) 회원가입 메소드
+	public int addMember(Member member) {
+		// 디버깅 코드
+		System.out.println("[debug] MemberService : memberId, memberPw값 확인 -> " + member.toString());
+		
+		int insertRs = 0;
+		Connection conn = null;
+		try {
+			conn = DBUtil.getConnection("jdbc:mariadb://127.0.0.1:3306/todo", "root", "java1004");
+			memberDao = new MemberDao();
+			insertRs = memberDao.insertMember(conn, member);
+			System.out.println("[debug] MemberService : insertRs -> " + insertRs);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return insertRs;
+	}
 	// (1) 로그인 메소드
 	public Member login(Member member) {
 		// Member 클래스 객체 변수 선언
