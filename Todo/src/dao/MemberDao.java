@@ -9,6 +9,34 @@ import vo.Member;
 
 // 쿼리만 만드는 곳
 public class MemberDao {
+	
+	// (3) 회원탈퇴 메소드
+	public int deleteMember(Connection conn, String memberId, String memberPw) throws SQLException {
+		// 디버깅 코드
+		System.out.println("[debug] MemberDao : memberId 확인 -> " + memberId);
+		System.out.println("[debug] MemberDao : memberPw 확인 -> " + memberPw);
+		
+		// 쿼리 생성
+		String sql = MemberQuery.DELETE_MEMBER;
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, memberId);
+		stmt.setString(2, memberPw);
+		
+		// 쿼리 실행
+		int deleteRs = stmt.executeUpdate();
+		if(deleteRs == 1) {
+			System.out.println("[debug] MemberDao : 회원탈퇴 성공!");
+		} else {
+			System.out.println("[debug] MemberDao : 회원탈퇴 실패!");
+		}
+		
+		// 기록 종료
+		stmt.close();
+		
+		return deleteRs;
+	}
+	
+	
 	// (2) 회원가입 메소드
 	public int insertMember(Connection conn, Member member) throws SQLException {
 		// 디버깅 코드

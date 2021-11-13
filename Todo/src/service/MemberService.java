@@ -4,12 +4,52 @@ import java.sql.Connection;
 
 import commons.DBUtil;
 import dao.MemberDao;
+import dao.TodoDao;
 import vo.Member;
 
 // select -> get, insert -> add, update -> modify, delete -> remove
 public class MemberService {
-	// MemberService가 어떤 행위를 하기 위해서 사용되어지는 memberDao는 매번 동일해야 하니 맨 윗부분에 선언
+	// MemberService가 어떤 행위를 하기 위해서 사용되어지는 memberDao와 todoDao는 매번 동일해야 하니 맨 윗부분에 선언
 	private MemberDao memberDao;
+	private TodoDao todoDao;
+	
+	// (3) 회원탈퇴 메소드
+	public boolean removeMember(String memberId, String memberPw) {
+		// 디버깅 코드
+		System.out.println("[debug] MemberService : memberId값 확인 -> " + memberId);
+		System.out.println("[debug] MemberService : memberPw값 확인 -> " + memberPw);
+		
+		boolean result = false;
+		Connection conn = DBUtil.getConnection("jdbc:mariadb://127.0.0.1:3306/todo", "root", "java1004");;
+		try {
+			// 트랜잭션 처리
+			conn.setAutoCommit(false); // deleteMember() 메소드와 deleteTodo() 메소드를 처음에 실패했다고 가정
+			// 먼저 todo list부터 삭제
+			todoDao = new TodoDao();
+			todoDao.deleteTodo(conn, memberId);
+			// 비밀번호가 틀려서 삭제가 안될 경우 강제로 예외를 발생(throw)시켜 catch절로 이동해서 rollback 되도록
+			memberDao = new MemberDao();
+			if(memberDao.deleteMember(conn, memberId, memberPw) != 1) {
+				throw new Exception();
+			}
+			conn.commit();
+			result = true; // try 절이 정상적으로 실행되면 finally 절으로 이동
+		} catch (Exception e) {
+			e.printStackTrace();
+			try {
+				conn.rollback(); // deleteMember() 메소드와 deleteTodo() 메소드 중 하나라도 에러가 발생시 롤백 시킴
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		} finally {
+			try {
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
 	
 	// (2) 회원가입 메소드
 	public int addMember(Member member) {
@@ -34,6 +74,7 @@ public class MemberService {
 		}
 		return insertRs;
 	}
+	
 	// (1) 로그인 메소드
 	public Member login(Member member) {
 		// Member 클래스 객체 변수 선언
