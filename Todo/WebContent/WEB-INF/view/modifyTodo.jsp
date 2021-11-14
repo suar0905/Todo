@@ -19,6 +19,7 @@
 </script>
 </head>
 <body>
+	<h1><a href="${pageContext.request.contextPath}/member/todoList?y=${y}&m=${m}&d=${d}">일정목록 보기</a></h1>
 	<h1>수정전 일정</h1>
 	<table border="1">
 		<tr>

@@ -40,6 +40,9 @@ public class ModifyTodoController extends HttpServlet {
 		request.setAttribute("todoContent", todoContent);
 		request.setAttribute("createDate", createDate);
 		request.setAttribute("updateDate", updateDate);
+		request.setAttribute("y", todoDate.substring(0,4));
+		request.setAttribute("m", todoDate.substring(5,7));
+		request.setAttribute("d", todoDate.substring(8,10));
 		
 		request.getRequestDispatcher("/WEB-INF/view/modifyTodo.jsp").forward(request, response);
 	}
