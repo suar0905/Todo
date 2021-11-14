@@ -35,7 +35,7 @@
 								<!-- 날짜별 일정 -->
 								<c:forEach var="todo" items="${todoList}">
 									<c:if test="${(i-startBlank) == todo.todoDate.substring(8)}"> <!-- todo.todoDate.substring(8)는 2021-10-22이면 22를 의미 -->
-										<div>${todo.todoContent}</div>
+										<div style="color:${todo.fontColor};">${todo.todoContent}</div>
 									</c:if>
 								</c:forEach>
 							</div>

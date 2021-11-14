@@ -21,16 +21,19 @@ public class AddTodoController extends HttpServlet {
 		String memberId = ((Member)(request.getSession().getAttribute("loginMember"))).getMemberId();
 		String todoDate = request.getParameter("todoDate");
 		String todoContent = request.getParameter("todoContent");
+		String fontColor = request.getParameter("fontColor");
 		// 디버깅코드
 		System.out.println("[debug] AddTodoController : memberId값 확인 -> " + memberId);
 		System.out.println("[debug] AddTodoController : todoDate값 확인 -> " + todoDate);
 		System.out.println("[debug] AddTodoController : todoContent값 확인 -> " + todoContent);
+		System.out.println("[debug] AddTodoController : fontColor값 확인 -> " + fontColor);
 		
 		// Todo 클래스 객체 생성
 		Todo todo = new Todo();
 		todo.setMemberId(memberId);
 		todo.setTodoDate(todoDate);
 		todo.setTodoContent(todoContent);
+		todo.setFontColor(fontColor);
 		System.out.println("[debug] AddTodoController : todo값 확인 -> " + todo);
 		
 		// TodoService 클래스 객체 생성

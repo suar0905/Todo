@@ -64,7 +64,7 @@ public class TodoService {
 	// (2) 일정 추가 메소드
 	public int addTodo(Todo todo) {
 		// 디버깅 코드
-		System.out.println("[debug] TodoService : memberId, todoDate, todoContent값 확인 -> " + todo.toString());
+		System.out.println("[debug] TodoService : memberId, todoDate, todoContent, fontColor값 확인 -> " + todo.toString());
 				
 		int insertRs = 0;
 		Connection conn = null;

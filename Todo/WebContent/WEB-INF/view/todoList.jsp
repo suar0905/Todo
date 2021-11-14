@@ -58,6 +58,10 @@
 				<th>todoContent</th>
 				<td><textarea id="todoContent" name="todoContent" rows="5" cols="100" placeholder="Enter todoContent"></textarea></td>
 			</tr>
+			<tr>
+				<th>fontColor</th>
+				<td><input type="color" id="fontColor" name="fontColor"></td>
+			</tr>
 		</table>
 		<button type="button" id="addBtn" onclick="button()">추가하기</button>
 	</form>

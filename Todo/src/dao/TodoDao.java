@@ -31,6 +31,7 @@ public class TodoDao {
 			Todo t = new Todo();
 			t.setTodoDate(rs.getString("todoDate"));
 			t.setTodoContent(rs.getString("todoContent5"));
+			t.setFontColor(rs.getString("fontColor"));
 			list.add(t);
 		}
 		
@@ -97,7 +98,7 @@ public class TodoDao {
 	// (3) 일정 추가 메소드
 	public int insertTodo(Connection conn, Todo todo) throws SQLException {
 		// 디버깅 코드
-		System.out.println("[debug] TodoDao : memberId, todoDate, todoContent값 확인 -> " + todo.toString());
+		System.out.println("[debug] TodoDao : memberId, todoDate, todoContent, fontColor값 확인 -> " + todo.toString());
 		
 		// 쿼리 생성
 		String sql = TodoQuery.INSERT_TODO_LIST;
@@ -105,6 +106,7 @@ public class TodoDao {
 		stmt.setString(1, todo.getMemberId());
 		stmt.setString(2, todo.getTodoDate());
 		stmt.setString(3, todo.getTodoContent());
+		stmt.setString(4, todo.getFontColor());
 		
 		// 쿼리 실행
 		int insertRs = stmt.executeUpdate();
