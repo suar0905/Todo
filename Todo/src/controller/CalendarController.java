@@ -21,8 +21,8 @@ public class CalendarController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 
 		String currentYear = request.getParameter("currentYear");
-		String currentMonth = request.getParameter("currentYear");
-		String option = request.getParameter("currentYear");
+		String currentMonth = request.getParameter("currentMonth");
+		String option = request.getParameter("option");
 		String memberId = ((Member)(request.getSession().getAttribute("loginMember"))).getMemberId();
 		// 디버깅 코드
 		System.out.println("[debug] CalendarController : currentYear 확인 -> " + currentYear);
@@ -42,6 +42,8 @@ public class CalendarController extends HttpServlet {
 		// 달력을 출력할 때 앞/뒤 필요한 공백 <td>
 		request.setAttribute("startBlank", map.get("startBlank"));
 		request.setAttribute("endBlank", map.get("endBlank"));
+		// 달력에 출력할 todo 내용 목록
+		request.setAttribute("todoList", map.get("todoList"));
 		
 		request.getRequestDispatcher("/WEB-INF/view/calendar.jsp").forward(request, response);
 	}

@@ -1,10 +1,15 @@
 package service;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import commons.DBUtil;
 import dao.TodoDao;
+import vo.Todo;
 
 public class CalendarService {
 	private TodoDao todoDao;
@@ -41,7 +46,7 @@ public class CalendarService {
 					}
 			  }
 			c.set(Calendar.YEAR, y); // 매개변수의 값인 년도로 바꾸어준다
-			c.set(Calendar.MONTH, m); // 매개변수의 값인 월로 바꾸어준다(월은 자바 api에선 0~11이다)		
+			c.set(Calendar.MONTH, m-1); // 매개변수의 값인 월로 바꾸어준다(월은 자바 api에선 0~11이다)		
 		}
 		c.set(Calendar.DATE, 1); // c의 객체가 오늘의 정보인데 같은 달 1일로 변경하겠다
 		
@@ -71,9 +76,45 @@ public class CalendarService {
 		map.put("endBlank", endBlank);
 		System.out.println("[debug] CalendarService : 첫 번째 map값 확인 -> " + map);
 		
-
+		// 2. 달력에 추가할 모델(todo) 알고리즘 코드
+		List<Todo> todoList = null;
+		Connection conn = null;
+		try {
+			conn = DBUtil.getConnection("jdbc:mariadb://127.0.0.1:3306/todo", "root", "java1004");
+			todoDao = new TodoDao();
+			Todo todo = new Todo(); // memberId, todoDate(년,월)가 필요, memberId는 매개변수로 입력받고, todoDate는 위에서 구해놓은 targetYear, targetMonth를 이용해서 구함
+			todo.setMemberId(memberId);
+			
+			/*
+			String t = ""; // t는 공백 변수 (targetMonth가 1,2,3...9일때 두자리 수를 만들기 위한 변수)
+			if(targetMonth < 10) { // targetMonth가 10보다 작으면
+				t="0";
+			}
+			*/
+			
+			String strYear ="" + targetYear;
+			String strMonth ="" + targetMonth;
+			if(targetMonth < 10) { // targetMonth가 10보다 작으면
+				strMonth = "0" + targetMonth;
+			}
+			todo.setTodoDate(strYear+"-"+strMonth);
+			System.out.println("[debug] CalendarService : todo 확인 -> " +todo);
+			
+			todoList = todoDao.selectTodoListByMonth(conn, todo);
+			System.out.println("[debug] CalendarService : todoList 확인 -> " + todoList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		map.put("todoList", todoList);
+		System.out.println("[debug] CalendarService : 두 번째 map값 확인 -> " + map);
+		
 		return map;
-		
-		
 	}	
 }

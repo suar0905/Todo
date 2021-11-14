@@ -17,11 +17,11 @@
 		<!-- 달력 생성 -->
 		<h1>
 			${targetYear}년 ${targetMonth}월
-			<span><a href="${pageContext.request.contextPath}/member/calendar?currentYear=${targetYear}%currentMonth=${targetMonth}%option=pre">▼</a></span>
-			<span><a href="${pageContext.request.contextPath}/member/calendar?currentYear=${targetYear}%currentMonth=${targetMonth}%option=next">▲</a></span>
+			<span><a href="${pageContext.request.contextPath}/member/calendar?currentYear=${targetYear}&currentMonth=${targetMonth}&option=pre">▼</a></span>
+			<span><a href="${pageContext.request.contextPath}/member/calendar?currentYear=${targetYear}&currentMonth=${targetMonth}&option=next">▲</a></span>
 		</h1>
 		
-		<h3> ${targetMonth}월달의 총 일정 개수 : </h3>
+		<h3> ${targetMonth}월달의 총 일정 개수 : ${todoList.size()}개</h3>
 		<table border="3">
 			<tr>
 				<td>일</td><td>월</td><td>화</td><td>수</td><td>목</td><td>금</td><td>토</td>
@@ -31,6 +31,14 @@
 					<c:if test="${i-startBlank >= 1 && i-startBlank <= endDay}">
 						<td>
 							<a href="${pageContext.request.contextPath}/member/todoList?y=${targetYear}&m=${targetMonth}&d=${i-startBlank}">${i-startBlank}</a>
+							<div>
+								<!-- 날짜별 일정 -->
+								<c:forEach var="todo" items="${todoList}">
+									<c:if test="${(i-startBlank) == todo.todoDate.substring(8)}"> <!-- todo.todoDate.substring(8)는 2021-10-22이면 22를 의미 -->
+										<div>${todo.todoContent}</div>
+									</c:if>
+								</c:forEach>
+							</div>
 						</td>
 					</c:if>
 					
