@@ -11,10 +11,40 @@ import vo.Todo;
 
 public class TodoDao {
 	
+	// (6) 캘린더에 일정내용 5글자 표시 메소드
+	public List<Todo> selectTodoListByMonth(Connection conn, Todo todo) throws SQLException {
+		// 디버깅 코드
+		System.out.println("[debug] TodoDao : memberId, todoDate값 확인 -> " + todo.toString());
+		
+		// 쿼리 생성
+		String sql = TodoQuery.SELECT_TODO_LIST_BY_MONTH;
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, todo.getMemberId());
+		stmt.setString(2, todo.getTodoDate());
+		
+		// 쿼리 실행
+		ResultSet rs = stmt.executeQuery();
+		
+		List<Todo> list = new ArrayList<Todo>();
+		
+		while(rs.next()) {
+			Todo t = new Todo();
+			t.setTodoDate(rs.getString("todoDate"));
+			t.setTodoContent(rs.getString("todoContent5"));
+			list.add(t);
+		}
+		
+		// 기록 종료
+		rs.close();
+		stmt.close();
+		
+		return list;
+	}
+	
 	// (5) 일정 삭제 메소드
 	public int deleteTodoList(Connection conn, Todo todo) throws SQLException {
 		// 디버깅 코드
-		System.out.println("[debug] TodoDao : todoNo, memberId값 확인 -> " + todo.getTodoNo());
+		System.out.println("[debug] TodoDao : todoNo, memberId값 확인 -> " + todo.toString());
 		
 		// 쿼리 생성
 		String sql = TodoQuery.DELETE_TODO_LIST;
