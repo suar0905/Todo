@@ -11,10 +11,63 @@ import vo.Todo;
 
 public class TodoDao {
 	
+	// (5) 일정 삭제 메소드
+	public int deleteTodoList(Connection conn, Todo todo) throws SQLException {
+		// 디버깅 코드
+		System.out.println("[debug] TodoDao : todoNo, memberId값 확인 -> " + todo.getTodoNo());
+		
+		// 쿼리 생성
+		String sql = TodoQuery.DELETE_TODO_LIST;
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, todo.getTodoNo());
+		stmt.setString(2, todo.getMemberId());
+		
+		// 쿼리 실행
+		int deleteRs = stmt.executeUpdate();
+		
+		if(deleteRs == 1) {
+			System.out.println("[debug] TodoDao : 삭제 성공!");
+		} else {
+			System.out.println("[debug] TodoDao : 삭제 실패!");
+		}
+		
+		// 기록 종료
+		stmt.close();
+		
+		return deleteRs;
+	}
+	
+	// (4) 일정 수정 메소드
+	public int updateTodoList(Connection conn, Todo todo) throws SQLException {
+		// 디버깅 코드
+		System.out.println("[debug] TodoDao : todoContent, todoNo, memberId값 확인 -> " + todo.toString());
+		
+		// 쿼리 생성
+		String sql = TodoQuery.UPDATE_TODO_LIST;
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, todo.getTodoContent());
+		stmt.setInt(2, todo.getTodoNo());
+		stmt.setString(3, todo.getMemberId());
+		
+		// 쿼리 실행
+		int updateRs = stmt.executeUpdate();
+		
+		if(updateRs == 1) {
+			System.out.println("[debug] TodoDao : 수정 성공!");
+		} else {
+			System.out.println("[debug] TodoDao : 수정 실패!");
+		}
+		
+		// 기록 종료
+		stmt.close();
+		
+		return updateRs;
+	}
+	
 	// (3) 일정 추가 메소드
 	public int insertTodo(Connection conn, Todo todo) throws SQLException {
 		// 디버깅 코드
-		System.out.println("[debug] TodoDao : todo 확인 -> " + todo.toString());
+		System.out.println("[debug] TodoDao : memberId, todoDate, todoContent값 확인 -> " + todo.toString());
 		
 		// 쿼리 생성
 		String sql = TodoQuery.INSERT_TODO_LIST;

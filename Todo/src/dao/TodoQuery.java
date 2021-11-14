@@ -16,9 +16,9 @@ public class TodoQuery {
 		DELETE_TODO = "DELETE FROM todo WHERE member_id=?";
 		// todo 테이블에서 member_id, todo_date, todo_content, create_date, update_date 항목에 ?,?,?,NOW(),NOW()값을 추가하여라
 		INSERT_TODO_LIST = "INSERT INTO todo(member_id, todo_date, todo_content, create_date, update_date) VALUES(?,?,?,NOW(),NOW())";
-		//
-		UPDATE_TODO_LIST = "";
-		//
-		DELETE_TODO_LIST = "";
+		// todo 테이블에서 todo_no가 ?이고, member_id가 ?일때, todo_content와 update_date값을 ?, NOW()값으로 수정하여라
+		UPDATE_TODO_LIST = "UPDATE todo SET todo_content=?, update_date=NOW() WHERE todo_no=? AND member_id=?";
+		// todo 테이블에서 todo_no가 ?이고, member_id가 ?일때의 데이터를 삭제하여라
+		DELETE_TODO_LIST = "DELETE FROM todo WHERE todo_no=? AND member_id=?";
 	}
 }

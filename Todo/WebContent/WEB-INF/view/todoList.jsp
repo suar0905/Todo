@@ -9,7 +9,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#addBtn').click(function(){
-			if($('#addContent').val() == '') {
+			if($('#todoContent').val() == '') {
 				alert('내용을 입력하세요');
 				return;
 			}
@@ -39,7 +39,7 @@
 					<td>${t.todoContent}</td>
 					<td>${t.createDate}</td>
 					<td>${t.updateDate}</td>
-					<td><a href="${pageContext.request.contextPath}/member/modifyTodo?todoNo=${t.todoNo}&memberId=${t.memberId}&todoDate=${t.todoDate}&todoContent=${t.todoContent}">수정</a></td>
+					<td><a href="${pageContext.request.contextPath}/member/modifyTodo?todoNo=${t.todoNo}&memberId=${t.memberId}&todoDate=${t.todoDate}&todoContent=${t.todoContent}&createDate=${t.createDate}&updateDate=${t.updateDate}">수정</a></td>
 					<td><a href="${pageContext.request.contextPath}/member/removeTodo?todoNo=${t.todoNo}&memberId=${t.memberId}&todoDate=${t.todoDate}">삭제</a></td>
 				</tr>
 			</c:forEach>
@@ -55,7 +55,7 @@
 			</tr>
 			<tr>
 				<th>todoContent</th>
-				<td><textarea name="todoContent" rows="5" cols="100" placeholder="Enter todoContent"></textarea></td>
+				<td><textarea id="todoContent" name="todoContent" rows="5" cols="100" placeholder="Enter todoContent"></textarea></td>
 			</tr>
 		</table>
 		<button type="button" id="addBtn" onclick="button()">추가하기</button>
