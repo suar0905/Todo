@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,5 +41,26 @@
 			<a href="${pageContext.request.contextPath}/addMember">회원가입</a>
 		</div>	
 	</form>
+	
+	<h2>최신 공지사항</h2>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>noticeTitle</th>
+				<th>createDate</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach var="n" items="${noticeList}">
+				<tr>
+					<td><a href="${pageContext.request.contextPath}/noticeOne?noticeNo=${n.noticeNo}">${n.noticeTitle}</a></td>
+					<td>${n.createDate}</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+	
+	<h2>관리자 로그인</h2>
+	<a href="${pageContext.request.contextPath}/adminLogin">관리자 로그인</a>
 </body>
 </html>

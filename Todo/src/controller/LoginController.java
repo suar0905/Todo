@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,12 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import service.MemberService;
+import service.NoticeService;
 import vo.Member;
+import vo.Notice;
 
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
 	// Controller가 Service를 메소드마다 생성하기 보단 맨 위에 지정하여 바로 생성할 수 있게하기 위해
 	private MemberService memberService;
+	private NoticeService noticeService;
 	
 	// 로그인 홈페이지
 	@Override
@@ -25,6 +30,13 @@ public class LoginController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/member/calendar");
 			return;
 		}
+		
+		// 로그인하기 전에 최신 공지 5개 보여줌
+		// NoticeService 클래스 객체 생성
+		noticeService = new NoticeService();
+		List<Notice> noticeList = noticeService.getNoticeList5();
+		System.out.println("[debug] LoginController : noticeList값 확인 -> " + noticeList);
+		request.setAttribute("noticeList", noticeList);
 		
 		request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
 	}
