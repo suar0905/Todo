@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인 페이지</title>
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){ // 현재 문서가 준비되면 매개변수로 넣은 콜백 함수를 실행하라는 의미
@@ -23,26 +28,46 @@
 	});
 </script>
 </head>
-<body>
-	<h1>LOGIN</h1>
-	<form id="loginForm" method="post" action="${pageContext.request.contextPath}/login">
-		<table border="1">
-			<tr>
-				<th>아이디</th>
-				<td><input type="text" id="memberId" name="memberId"></td>
-			</tr>
-			<tr>
-				<th>비밀번호</th>
-				<td><input type="password" id="memberPw" name="memberPw"></td>
-			</tr>
-		</table>
-		<div>
-			<button type="button" id="loginBtn" onclick="button()">로그인</button>
-			<a href="${pageContext.request.contextPath}/addMember">회원가입</a>
-		</div>	
-	</form>
+<body style="background-image: url('images/sky.jpg'); background-size: 100% 100%;">
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					<h2 class="heading-section">로그인</h2>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-md-7 col-lg-5">
+					<div class="login-wrap p-4 p-md-5">
+		      			<div class="icon d-flex align-items-center justify-content-center">
+		      				<span><i class="far fa-user"></i></span>
+		      			</div>
+		      			<h3 class="text-center mb-4">Sign In</h3>
+						<form class="login-form" id="loginForm" method="post" action="${pageContext.request.contextPath}/login">
+				      		<div class="form-group">
+				      			<input type="text" class="form-control rounded-left" placeholder="Username" id="memberId" name="memberId">
+				      		</div>
+				            <div class="form-group d-flex">
+				              <input type="password" class="form-control rounded-left" placeholder="Password" id="memberPw" name="memberPw">
+				            </div>
+				            <div class="form-group">
+				            	<button type="button" class="form-control btn btn-primary rounded submit px-3" id="loginBtn" onclick="button()">Login</button>
+				            </div>
+			            	<div class="form-group" style="text-align: center;">
+								<div>
+									<button class="btn btn-outline-light text-primary" type="reset">초기화</button>
+									<a class="btn btn-outline-light text-primary" href="${pageContext.request.contextPath}/addMember">회원가입</a>
+								</div>
+			            	</div>
+			          </form>
+	        		</div>
+				</div>
+			</div>
+		</div>
+	</section>
 	
 	<h2>최신 공지사항</h2>
+	<a href="${pageContext.request.contextPath}/noticeList">공지목록</a>
 	<table border="1">
 		<thead>
 			<tr>
