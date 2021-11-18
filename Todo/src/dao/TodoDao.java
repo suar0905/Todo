@@ -71,14 +71,15 @@ public class TodoDao {
 	// (4) 일정 수정 메소드
 	public int updateTodoList(Connection conn, Todo todo) throws SQLException {
 		// 디버깅 코드
-		System.out.println("[debug] TodoDao : todoContent, todoNo, memberId값 확인 -> " + todo.toString());
+		System.out.println("[debug] TodoDao : todoContent, fontColor, todoNo, memberId값 확인 -> " + todo.toString());
 		
 		// 쿼리 생성
 		String sql = TodoQuery.UPDATE_TODO_LIST;
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, todo.getTodoContent());
-		stmt.setInt(2, todo.getTodoNo());
-		stmt.setString(3, todo.getMemberId());
+		stmt.setString(2, todo.getFontColor());
+		stmt.setInt(3, todo.getTodoNo());
+		stmt.setString(4, todo.getMemberId());
 		
 		// 쿼리 실행
 		int updateRs = stmt.executeUpdate();

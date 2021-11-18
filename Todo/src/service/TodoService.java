@@ -39,7 +39,7 @@ public class TodoService {
 	// (3) 일정 수정 메소드
 	public int modifyTodo(Todo todo) {
 		// 디버깅 코드
-		System.out.println("[debug] TodoService : todoContent, todoNo, memberId값 확인 -> " + todo.toString());
+		System.out.println("[debug] TodoService : todoContent, fontColor, todoNo, memberId값 확인 -> " + todo.toString());
 		
 		int updateRs = 0;
 		Connection conn = null;
