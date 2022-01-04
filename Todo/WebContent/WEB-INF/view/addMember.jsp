@@ -28,7 +28,7 @@
 </script>
 </head>
 <body>
-	<body style="background-image: url('images/sky.jpg'); background-size: 100% 100%;">
+	<body style="background-image: url('images/sky.jpg'); background-size: 100% 120%;">
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">

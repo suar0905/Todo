@@ -22,6 +22,9 @@ public class TodoListController extends HttpServlet {
 		String y = request.getParameter("y");
 		String m = request.getParameter("m");
 		String d = request.getParameter("d");
+		if(m.length() < 2) { // m의 길이가 2보다 작으면, 즉 한자리이면
+			m = "0" + m;
+		}
 		if(d.length() < 2) { // d의 길이가 2보다 작으면, 즉 한자리이면
 			d = "0" + d;
 		}

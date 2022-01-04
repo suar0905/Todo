@@ -20,5 +20,4 @@ public class LogoutController extends HttpServlet {
 		// 로그인 페이지로 이동
 		request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
 	}
-
 }

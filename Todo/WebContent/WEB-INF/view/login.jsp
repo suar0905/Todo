@@ -28,7 +28,7 @@
 	});
 </script>
 </head>
-<body style="background-image: url('images/sky.jpg'); background-size: 100% 100%;">
+<body style="background-image: url('images/sky.jpg'); background-size: 100% 120%;">
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">
@@ -65,27 +65,5 @@
 			</div>
 		</div>
 	</section>
-	
-	<h2>최신 공지사항</h2>
-	<a href="${pageContext.request.contextPath}/noticeList">공지목록</a>
-	<table border="1">
-		<thead>
-			<tr>
-				<th>noticeTitle</th>
-				<th>createDate</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="n" items="${noticeList}">
-				<tr>
-					<td><a href="${pageContext.request.contextPath}/noticeOne?noticeNo=${n.noticeNo}">${n.noticeTitle}</a></td>
-					<td>${n.createDate}</td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-	
-	<h2>관리자 로그인</h2>
-	<a href="${pageContext.request.contextPath}/adminLogin">관리자 로그인</a>
 </body>
 </html>

@@ -98,6 +98,8 @@ public class CalendarService {
 				strMonth = "0" + targetMonth;
 			}
 			todo.setTodoDate(strYear+"-"+strMonth);
+			System.out.println("[debug] CalendarService : strYear 확인 -> " +strYear);
+			System.out.println("[debug] CalendarService : strMonth 확인 -> " +strMonth);
 			System.out.println("[debug] CalendarService : todo 확인 -> " +todo);
 			
 			todoList = todoDao.selectTodoListByMonth(conn, todo);
