@@ -45,10 +45,10 @@
 		      			<h3 class="text-center mb-4">Sign In</h3>
 						<form class="login-form" id="loginForm" method="post" action="${pageContext.request.contextPath}/login">
 				      		<div class="form-group">
-				      			<input type="text" class="form-control rounded-left" placeholder="Username" id="memberId" name="memberId">
+				      			<input type="text" class="form-control rounded-left" id="memberId" name="memberId" value="admin">
 				      		</div>
 				            <div class="form-group d-flex">
-				              <input type="password" class="form-control rounded-left" placeholder="Password" id="memberPw" name="memberPw">
+				              <input type="password" class="form-control rounded-left" id="memberPw" name="memberPw" value="1234">
 				            </div>
 				            <div class="form-group">
 				            	<button type="button" class="form-control btn btn-primary rounded submit px-3" id="loginBtn" onclick="button()">Login</button>

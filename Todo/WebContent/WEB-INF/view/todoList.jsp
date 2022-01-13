@@ -35,32 +35,34 @@
 	  </ul>
 	</nav>
 	
-	<div style="text-align:center;">
-		<h1>${todoDate} 일정목록</h1>
-		<table class="table table-bordered table-hover" border="1">
-			<thead style="background-color: #F5FFFA;">
-				<tr>
-					<th>todoDate</th>
-					<th>todoContent</th>
-					<th>createDate</th>
-					<th>updateDate</th>
-					<th>수정</th>
-					<th>삭제</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="t" items="${todoList}">
-					<tr>
-						<td>${t.todoDate}</td>
-						<td>${t.todoContent}</td>
-						<td>${t.createDate}</td>
-						<td>${t.updateDate}</td>
-						<td><a class="btn btn-outline-success" href="${pageContext.request.contextPath}/member/modifyTodo?todoNo=${t.todoNo}&memberId=${t.memberId}&todoDate=${t.todoDate}&todoContent=${t.todoContent}&createDate=${t.createDate}&updateDate=${t.updateDate}">수정</a></td>
-						<td><a class="btn btn-outline-success" href="${pageContext.request.contextPath}/member/removeTodo?todoNo=${t.todoNo}&memberId=${t.memberId}&todoDate=${t.todoDate}">삭제</a></td>
+	<div class="container">
+		<div style="text-align:center;">
+			<h1>${todoDate} 일정목록</h1>
+			<table class="table table-bordered table-hover" border="1">
+				<thead style="background-color: #F5FFFA;">
+					<tr class="table-sm">
+						<th>일정 날짜</th>
+						<th>일정 내용</th>
+						<th>작성일</th>
+						<th>수정일</th>
+						<th>수정</th>
+						<th>삭제</th>
 					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					<c:forEach var="t" items="${todoList}">
+						<tr>
+							<td>${t.todoDate}</td>
+							<td>${t.todoContent}</td>
+							<td>${t.createDate}</td>
+							<td>${t.updateDate}</td>
+							<td><a class="btn btn-outline-success" href="${pageContext.request.contextPath}/member/modifyTodo?todoNo=${t.todoNo}&memberId=${t.memberId}&todoDate=${t.todoDate}&todoContent=${t.todoContent}&createDate=${t.createDate}&updateDate=${t.updateDate}">수정</a></td>
+							<td><a class="btn btn-outline-success" href="${pageContext.request.contextPath}/member/removeTodo?todoNo=${t.todoNo}&memberId=${t.memberId}&todoDate=${t.todoDate}">삭제</a></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
 	</div>
 	
 	<div class="addPage">
@@ -68,15 +70,15 @@
 		<form id="addForm" method="post" action="${pageContext.request.contextPath}/member/addTodo">
 			<table style="margin-left: auto; margin-right: auto;" border="1">
 				<tr>
-					<th>todoDate</th>
+					<th>일정 날짜</th>
 					<td><input  class="btn btn-outline-secondary type="text" name="todoDate" value="${todoDate}" readonly="readonly"></td>
 				</tr>
 				<tr>
-					<th>todoContent</th>
+					<th>일정 내용</th>
 					<td><textarea  class="btn btn-outline-secondary id="todoContent" name="todoContent" rows="5" cols="100" placeholder="Enter todoContent"></textarea></td>
 				</tr>
 				<tr>
-					<th>fontColor</th>
+					<th>글자 색상</th>
 					<td><input class="btn btn-light" type="color" id="fontColor" name="fontColor"></td>
 				</tr>
 			</table>
