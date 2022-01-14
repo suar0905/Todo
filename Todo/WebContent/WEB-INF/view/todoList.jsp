@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style type="text/css">
 	.addPage {
-		padding-top: 100px;
+		padding-top: 30px;
 		text-align: center;
 	}
 </style>
@@ -37,12 +37,13 @@
 	
 	<div class="container">
 		<div style="text-align:center;">
-			<h1>${todoDate} 일정목록</h1>
+			<h2>${todoDate} 일정목록</h2>
 			<table class="table table-bordered table-hover" border="1">
 				<thead style="background-color: #F5FFFA;">
 					<tr class="table-sm">
 						<th>일정 날짜</th>
 						<th>일정 내용</th>
+						<th>중요도</th>
 						<th>작성일</th>
 						<th>수정일</th>
 						<th>수정</th>
@@ -54,9 +55,28 @@
 						<tr>
 							<td>${t.todoDate}</td>
 							<td>${t.todoContent}</td>
+							<td>
+								<c:choose>
+									<c:when test="${t.todoScore == 1}">
+										<div>★☆☆☆☆</div>
+									</c:when>
+									<c:when test="${t.todoScore == 2}">
+										<div>★★☆☆☆</div>
+									</c:when>
+									<c:when test="${t.todoScore == 3}">
+										<div>★★★☆☆</div>
+									</c:when>
+									<c:when test="${t.todoScore == 4}">
+										<div>★★★★☆</div>
+									</c:when>
+									<c:when test="${t.todoScore == 5}">
+										<div>★★★★★</div>
+									</c:when>
+								</c:choose>
+							</td>
 							<td>${t.createDate}</td>
 							<td>${t.updateDate}</td>
-							<td><a class="btn btn-outline-success" href="${pageContext.request.contextPath}/member/modifyTodo?todoNo=${t.todoNo}&memberId=${t.memberId}&todoDate=${t.todoDate}&todoContent=${t.todoContent}&createDate=${t.createDate}&updateDate=${t.updateDate}">수정</a></td>
+							<td><a class="btn btn-outline-success" href="${pageContext.request.contextPath}/member/modifyTodo?todoNo=${t.todoNo}&memberId=${t.memberId}&todoDate=${t.todoDate}&todoContent=${t.todoContent}&todoScore=${t.todoScore}&createDate=${t.createDate}&updateDate=${t.updateDate}">수정</a></td>
 							<td><a class="btn btn-outline-success" href="${pageContext.request.contextPath}/member/removeTodo?todoNo=${t.todoNo}&memberId=${t.memberId}&todoDate=${t.todoDate}">삭제</a></td>
 						</tr>
 					</c:forEach>
@@ -65,26 +85,44 @@
 		</div>
 	</div>
 	
+	<div class="container">
+		<br><hr>
+	</div>
+
 	<div class="addPage">
-		<h1>일정 추가</h1>
-		<form id="addForm" method="post" action="${pageContext.request.contextPath}/member/addTodo">
-			<table style="margin-left: auto; margin-right: auto;" border="1">
-				<tr>
-					<th>일정 날짜</th>
-					<td><input  class="btn btn-outline-secondary type="text" name="todoDate" value="${todoDate}" readonly="readonly"></td>
-				</tr>
-				<tr>
-					<th>일정 내용</th>
-					<td><textarea  class="btn btn-outline-secondary id="todoContent" name="todoContent" rows="5" cols="100" placeholder="Enter todoContent"></textarea></td>
-				</tr>
-				<tr>
-					<th>글자 색상</th>
-					<td><input class="btn btn-light" type="color" id="fontColor" name="fontColor"></td>
-				</tr>
-			</table>
-			<br>
-			<button class="btn btn-outline-secondary" type="button" id="addBtn" onclick="button()">추가하기</button>
-		</form>
+		<div class="container">
+			<h2>일정 추가</h2>
+			<form id="addForm" method="post" action="${pageContext.request.contextPath}/member/addTodo">
+				<table class="table table-bordered" border="1">
+					<tr>
+						<th>일정 날짜</th>
+						<td><input  class="form-control-sm" type="text" name="todoDate" style="text-align:center;" value="${todoDate}" readonly="readonly"></td>
+					</tr>
+					<tr>
+						<th>일정 내용</th>
+						<td><textarea  class="form-control" id="todoContent" name="todoContent" rows="5" cols="100" placeholder="내용을 입력해주세요"></textarea></td>
+					</tr>
+					<tr>
+						<th>중요도</th>
+						<td>
+							<select name="todoScore" class="form-control-sm">
+								<option value="1">★☆☆☆☆</option>
+								<option value="2">★★☆☆☆</option>
+								<option value="3">★★★☆☆</option>
+								<option value="4">★★★★☆</option>
+								<option value="5">★★★★★</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<th>글자 색상</th>
+						<td><input class="form-control-sm" type="color" id="fontColor" name="fontColor"></td>
+					</tr>
+				</table>
+				<br>
+				<button class="btn btn-danger" type="button" id="addBtn" onclick="button()">추가하기</button>
+			</form>
+		</div>
 	</div>
 </body>
 </html>

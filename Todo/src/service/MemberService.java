@@ -20,7 +20,7 @@ public class MemberService {
 		System.out.println("[debug] MemberService : memberPw값 확인 -> " + memberPw);
 		
 		boolean result = false;
-		Connection conn = DBUtil.getConnection("jdbc:mariadb://127.0.0.1:3306/todo", "root", "java1004");;
+		Connection conn = DBUtil.getConnection("jdbc:mariadb://3.34.40.41:3306/todo", "root", "java1004");;
 		try {
 			// 트랜잭션 처리
 			conn.setAutoCommit(false); // deleteMember() 메소드와 deleteTodo() 메소드를 처음에 실패했다고 가정
@@ -59,7 +59,7 @@ public class MemberService {
 		int insertRs = 0;
 		Connection conn = null;
 		try {
-			conn = DBUtil.getConnection("jdbc:mariadb://127.0.0.1:3306/todo", "root", "java1004");
+			conn = DBUtil.getConnection("jdbc:mariadb://3.34.40.41:3306/todo", "root", "java1004");
 			memberDao = new MemberDao();
 			insertRs = memberDao.insertMember(conn, member);
 			System.out.println("[debug] MemberService : insertRs -> " + insertRs);
@@ -83,7 +83,7 @@ public class MemberService {
 		Connection conn = null;
 		try {
 			// Connection 클래스 객체에 변수 값 할당
-			conn = DBUtil.getConnection("jdbc:mariadb://127.0.0.1:3306/todo", "root", "java1004");
+			conn = DBUtil.getConnection("jdbc:mariadb://3.34.40.41:3306/todo", "root", "java1004");
 			System.out.println("[debug] MemberService : conn 확인 -> " + conn);
 			// MemberDao 클래스 객체 생성
 			memberDao = new MemberDao();

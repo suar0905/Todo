@@ -80,7 +80,7 @@ public class CalendarService {
 		List<Todo> todoList = null;
 		Connection conn = null;
 		try {
-			conn = DBUtil.getConnection("jdbc:mariadb://127.0.0.1:3306/todo", "root", "java1004");
+			conn = DBUtil.getConnection("jdbc:mariadb://3.34.40.41:3306/todo", "root", "java1004");
 			todoDao = new TodoDao();
 			Todo todo = new Todo(); // memberId, todoDate(년,월)가 필요, memberId는 매개변수로 입력받고, todoDate는 위에서 구해놓은 targetYear, targetMonth를 이용해서 구함
 			todo.setMemberId(memberId);

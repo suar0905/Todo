@@ -46,6 +46,7 @@ public class TodoListController extends HttpServlet {
 		// TodoService 클래스 객체 생성
 		todoService = new TodoService();
 		List<Todo> todoList = todoService.getTodoListByDate(todo);
+		
 		// todoList.jsp에 지정한(todoList, todoDate) 값들을 보내줌
 		request.setAttribute("todoList", todoList);
 		request.setAttribute("todoDate", todoDate);

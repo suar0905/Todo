@@ -22,11 +22,14 @@ public class AddTodoController extends HttpServlet {
 		String todoDate = request.getParameter("todoDate");
 		String todoContent = request.getParameter("todoContent");
 		String fontColor = request.getParameter("fontColor");
+		int todoScore = Integer.parseInt(request.getParameter("todoScore"));
+		
 		// 디버깅코드
 		System.out.println("[debug] AddTodoController : memberId값 확인 -> " + memberId);
 		System.out.println("[debug] AddTodoController : todoDate값 확인 -> " + todoDate);
 		System.out.println("[debug] AddTodoController : todoContent값 확인 -> " + todoContent);
 		System.out.println("[debug] AddTodoController : fontColor값 확인 -> " + fontColor);
+		System.out.println("[debug] AddTodoController : todoScore값 확인 -> " + todoScore);
 		
 		// Todo 클래스 객체 생성
 		Todo todo = new Todo();
@@ -34,6 +37,7 @@ public class AddTodoController extends HttpServlet {
 		todo.setTodoDate(todoDate);
 		todo.setTodoContent(todoContent);
 		todo.setFontColor(fontColor);
+		todo.setTodoScore(todoScore);
 		System.out.println("[debug] AddTodoController : todo값 확인 -> " + todo);
 		
 		// TodoService 클래스 객체 생성

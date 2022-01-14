@@ -22,6 +22,7 @@ public class ModifyTodoController extends HttpServlet {
 		String memberId = request.getParameter("memberId");
 		String todoDate = request.getParameter("todoDate");
 		String todoContent = request.getParameter("todoContent");
+		int todoScore = Integer.parseInt(request.getParameter("todoScore"));
 		String createDate = request.getParameter("createDate");
 		String updateDate = request.getParameter("updateDate");
 		
@@ -30,6 +31,7 @@ public class ModifyTodoController extends HttpServlet {
 		System.out.println("[debug] ModifyTodoController(doGet) : memberId 확인 -> " + memberId);
 		System.out.println("[debug] ModifyTodoController(doGet) : todoDate 확인 -> " + todoDate);
 		System.out.println("[debug] ModifyTodoController(doGet) : todoContent 확인 -> " + todoContent);
+		System.out.println("[debug] ModifyTodoController(doGet) : todoScore 확인 -> " + todoScore);
 		System.out.println("[debug] ModifyTodoController(doGet) : createDate 확인 -> " + createDate);
 		System.out.println("[debug] ModifyTodoController(doGet) : updateDate 확인 -> " + updateDate);
 		
@@ -38,8 +40,10 @@ public class ModifyTodoController extends HttpServlet {
 		request.setAttribute("memberId", memberId);
 		request.setAttribute("todoDate", todoDate);
 		request.setAttribute("todoContent", todoContent);
+		request.setAttribute("todoScore", todoScore);
 		request.setAttribute("createDate", createDate);
 		request.setAttribute("updateDate", updateDate);
+
 		request.setAttribute("y", todoDate.substring(0,4));
 		request.setAttribute("m", todoDate.substring(5,7));
 		request.setAttribute("d", todoDate.substring(8,10));
@@ -56,6 +60,7 @@ public class ModifyTodoController extends HttpServlet {
 		String todoDate = request.getParameter("todoDate");
 		String todoContent = request.getParameter("todoContent");
 		String fontColor = request.getParameter("fontColor");
+		int todoScore = Integer.parseInt(request.getParameter("todoScore"));
 		
 		// 디버깅 코드
 		System.out.println("[debug] ModifyTodoController(doPost) : todoNo 확인 -> " + todoNo);
@@ -63,6 +68,7 @@ public class ModifyTodoController extends HttpServlet {
 		System.out.println("[debug] ModifyTodoController(doPost) : todoDate 확인 -> " + todoDate);
 		System.out.println("[debug] ModifyTodoController(doPost) : todoContent 확인 -> " + todoContent);
 		System.out.println("[debug] ModifyTodoController(doPost) : fontColor 확인 -> " + fontColor);
+		System.out.println("[debug] ModifyTodoController(doPost) : todoScore 확인 -> " + todoScore);
 		
 		// Todo 클래스 객체 생성
 		Todo todo = new Todo();
@@ -71,6 +77,7 @@ public class ModifyTodoController extends HttpServlet {
 		todo.setTodoDate(todoDate);
 		todo.setTodoContent(todoContent);
 		todo.setFontColor(fontColor);
+		todo.setTodoScore(todoScore);
 		
 		// TodoService 클래스 객체 생성
 		todoService = new TodoService();

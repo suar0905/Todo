@@ -6,6 +6,7 @@ public class Todo {
 	private String memberId; // Member테이블의 memberId 외래키이므로 private Member member; 가능하다
 	private String todoDate;
 	private String todoContent;
+	private int todoScore; // 일정 중요도
 	private String createDate;
 	private String updateDate;
 	private String fontColor;
@@ -39,6 +40,13 @@ public class Todo {
 		this.todoContent = todoContent;
 	}
 	
+	public int getTodoScore() {
+		return todoScore;
+	}
+	public void setTodoScore(int todoScore) {
+		this.todoScore = todoScore;
+	}
+	
 	public String getCreateDate() {
 		return createDate;
 	}
@@ -60,10 +68,11 @@ public class Todo {
 		this.fontColor = fontColor;
 	}
 	
+	// 객체가 가지고 있는 정보나 값들을 문자열로 만들어 리턴하는 메소드이다
 	@Override
 	public String toString() {
 		return "Todo [todoNo=" + todoNo + ", memberId=" + memberId + ", todoDate=" + todoDate + ", todoContent="
-				+ todoContent + ", createDate=" + createDate + ", updateDate=" + updateDate + ", fontColor=" + fontColor
-				+ "]";
+				+ todoContent + ", todoScore=" + todoScore + ", createDate=" + createDate + ", updateDate=" + updateDate
+				+ ", fontColor=" + fontColor + "]";
 	}
 }

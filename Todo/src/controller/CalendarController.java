@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import service.CalendarService;
 import vo.Member;
+import vo.Todo;
 
 @WebServlet("/member/calendar")
 public class CalendarController extends HttpServlet {
@@ -19,11 +21,11 @@ public class CalendarController extends HttpServlet {
 	// 달력 페이지
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 
 		String currentYear = request.getParameter("currentYear");
 		String currentMonth = request.getParameter("currentMonth");
 		String option = request.getParameter("option");
 		String memberId = ((Member)(request.getSession().getAttribute("loginMember"))).getMemberId();
+		
 		// 디버깅 코드
 		System.out.println("[debug] CalendarController : currentYear 확인 -> " + currentYear);
 		System.out.println("[debug] CalendarController : currentMonth 확인 -> " + currentMonth);
@@ -34,7 +36,7 @@ public class CalendarController extends HttpServlet {
 		calendarService = new CalendarService();
 		Map<String, Object> map = calendarService.getTargetCalendar(memberId, currentYear, currentMonth, option);
 		System.out.println("[debug] CalendarController : map 확인 -> " + map);
-		
+				
 		// 모델
 		request.setAttribute("targetYear", map.get("targetYear"));
 		request.setAttribute("targetMonth", map.get("targetMonth"));

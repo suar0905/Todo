@@ -2,6 +2,7 @@ package service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.List;
 
 import commons.DBUtil;
@@ -19,7 +20,7 @@ public class TodoService {
 		int deleteRs = 0;
 		Connection conn = null;
 		try {
-			conn = DBUtil.getConnection("jdbc:mariadb://127.0.0.1:3306/todo", "root", "java1004");
+			conn = DBUtil.getConnection("jdbc:mariadb://3.34.40.41:3306/todo", "root", "java1004");
 			// TodoDao 클래스 객체 생성
 			todoDao = new TodoDao();
 			deleteRs = todoDao.deleteTodoList(conn, todo);
@@ -39,12 +40,12 @@ public class TodoService {
 	// (3) 일정 수정 메소드
 	public int modifyTodo(Todo todo) {
 		// 디버깅 코드
-		System.out.println("[debug] TodoService : todoContent, fontColor, todoNo, memberId값 확인 -> " + todo.toString());
+		System.out.println("[debug] TodoService : todoContent, fontColor, todoNo, memberId, todoScore값 확인 -> " + todo.toString());
 		
 		int updateRs = 0;
 		Connection conn = null;
 		try {
-			conn = DBUtil.getConnection("jdbc:mariadb://127.0.0.1:3306/todo", "root", "java1004");
+			conn = DBUtil.getConnection("jdbc:mariadb://3.34.40.41:3306/todo", "root", "java1004");
 			// TodoDao 클래스 객체 생성
 			todoDao = new TodoDao();
 			updateRs = todoDao.updateTodoList(conn, todo);
@@ -64,12 +65,12 @@ public class TodoService {
 	// (2) 일정 추가 메소드
 	public int addTodo(Todo todo) {
 		// 디버깅 코드
-		System.out.println("[debug] TodoService : memberId, todoDate, todoContent, fontColor값 확인 -> " + todo.toString());
+		System.out.println("[debug] TodoService : memberId, todoDate, todoContent, fontColor값, todoScore 확인 -> " + todo.toString());
 				
 		int insertRs = 0;
 		Connection conn = null;
 		try {
-			conn = DBUtil.getConnection("jdbc:mariadb://127.0.0.1:3306/todo", "root", "java1004");
+			conn = DBUtil.getConnection("jdbc:mariadb://3.34.40.41:3306/todo", "root", "java1004");
 			// TodoDao 클래스 객체 생성
 			todoDao = new TodoDao();
 			insertRs = todoDao.insertTodo(conn, todo);
@@ -95,7 +96,7 @@ public class TodoService {
 		Connection conn = null;
 		
 		try {
-			conn = DBUtil.getConnection("jdbc:mariadb://127.0.0.1:3306/todo", "root", "java1004");
+			conn = DBUtil.getConnection("jdbc:mariadb://3.34.40.41:3306/todo", "root", "java1004");
 			// TodoDao 클래스 객체 생성
 			todoDao = new TodoDao();
 			todoList = todoDao.selectTodoListByDate(conn, todo);
